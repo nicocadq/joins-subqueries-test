@@ -6,11 +6,11 @@ Data Bases September test
 
  #### Mostrar todos los actores que participan en películas.
 ```sql
-SELECT f.title, COUNT(*) count_actors
-FROM film f
-INNER JOIN film_actor fa
-on fa.film_id = f.film_id
-GROUP BY f.title;
+SELECT actor.actor_id AS actor_id, GROUP_CONCAT(film_actor.film_id) AS films_ids
+FROM actor 
+INNER JOIN film_actor
+ON actor.actor_id=film_actor.actor_id
+GROUP BY actor.actor_id
 ```
  #### Mostrar la cantidad de actores que participan por película.
 ```sql
