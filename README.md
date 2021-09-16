@@ -58,13 +58,13 @@ FROM inventory
 GROUP BY inventory.store_id
 ```
 #### 8 - Mostrar cantidad de películas por película y tienda.
-```bash
+```sql
 SELECT COUNT(*) films, inventory.store_id, inventory.film_id
 FROM inventory
 GROUP BY inventory.store_id, inventory.film_id
 ```
 #### 9 - Mostrar cantidad de películas por arriba del promedio del rental_rate
-```bash
+```sql
 
 ```
 
