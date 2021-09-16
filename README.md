@@ -14,12 +14,12 @@ GROUP BY actor.actor_id
 ```
  #### 2 - Mostrar la cantidad de actores que participan por película.
 ```sql
-SELECT COUNT(*) cantidad_actores, f.title titulo_pelicula
-FROM actor a 
-INNER JOIN film_actor fa 
-ON a.actor_id=fa.actor_id 
-INNER JOIN film f ON fa.film_id=f.film_id
-GROUP BY f.title;
+SELECT COUNT(*) actors, film.title
+FROM actor
+INNER JOIN film_actor
+ON actor.actor_id=film_actor.actor_id 
+INNER JOIN film ON film_actor.film_id=film.film_id
+GROUP BY film.title
 ```
 #### 3 - Mostrar la cantidad de películas que participa cada actor.
 ```sql
@@ -31,11 +31,11 @@ GROUP BY actor.actor_id
 ```
 #### 4 - Saber si hay actores que no trabajaron en ninguna película. 
 ```sql
-SELECT a.actor_id id, a.first_name nombre
-FROM actor a
-LEFT JOIN film_actor fa
-ON fa.actor_id = a.actor_id
-WHERE fa.film_id IS NULL;
+SELECT actor.actor_id
+FROM actor
+LEFT JOIN film_actor
+ON film_actor.actor_id = actor.actor_id
+WHERE film_actor.film_id IS NULL
 ```
 #### 5 - Mostrar los actores que participan en películas por arriba del promedio que el resto.
 FALLA, no se puede referenciar al alias `films_count`...pero podriamos solucionarlo con alias
@@ -59,11 +59,9 @@ GROUP BY inventory.store_id
 ```
 #### 8 - Mostrar cantidad de películas por película y tienda.
 ```bash
-SELECT COUNT(*) cantidad, f.title pelicula, i.store_id id_tienda
-FROM film f
-INNER JOIN inventory i
-ON f.film_id=i.film_id
-GROUP BY f.title, i.store_id;
+SELECT COUNT(*) films, inventory.store_id, inventory.film_id
+FROM inventory
+GROUP BY inventory.store_id, inventory.film_id
 ```
 #### 9 - Mostrar cantidad de películas por arriba del promedio del rental_rate
 ```bash
